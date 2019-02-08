@@ -23,12 +23,12 @@ public class SurveyController {
 	private SurveyService surveyService;
 
 	@GetMapping("surveys/{surveyId}/questions")
-	public List<Question> getQuestionsListOfSurvey(@PathVariable String surveyId) {
+	public List<Question> getQuestionsListOfSurvey(@PathVariable final String surveyId) {
 		return surveyService.retrieveQuestions(surveyId);
 	}
 
 	@GetMapping("surveys/{surveyId}/questions/{questionId}")
-	public Question getQuestionFromSurvey(@PathVariable String surveyId, @PathVariable String questionId) {
+	public Question getQuestionFromSurvey(@PathVariable final String surveyId, @PathVariable final String questionId) {
 		return surveyService.retrieveQuestion(surveyId, questionId);
 	}
 
@@ -38,9 +38,13 @@ public class SurveyController {
 	}
 
 	@PostMapping("surveys/{surveyId}/add")
-	public ResponseEntity<Void> addQuestionToSurvey(@PathVariable String surveyId, @RequestBody Question question) {
+	public ResponseEntity<Void> addQuestionToSurvey(@PathVariable final String surveyId,
+			@RequestBody final Question question) {
 
 		Question newQuestion = surveyService.addQuestion(surveyId, question);
+
+		if (null == newQuestion)
+			return ResponseEntity.noContent().build();
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(newQuestion.getId())
 				.toUri();
