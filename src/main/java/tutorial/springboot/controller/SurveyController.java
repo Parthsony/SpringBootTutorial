@@ -22,6 +22,16 @@ public class SurveyController {
 	@Autowired
 	private SurveyService surveyService;
 
+	@GetMapping("surveys")
+	public List<Survey> getAllSurveys() {
+		return surveyService.retrieveAllSurveys();
+	}
+
+	@GetMapping("surveys/{surveyId}")
+	public Survey getSurvey(@PathVariable final String surveyId) {
+		return surveyService.retrieveSurvey(surveyId);
+	}
+
 	@GetMapping("surveys/{surveyId}/questions")
 	public List<Question> getQuestionsListOfSurvey(@PathVariable final String surveyId) {
 		return surveyService.retrieveQuestions(surveyId);
@@ -30,11 +40,6 @@ public class SurveyController {
 	@GetMapping("surveys/{surveyId}/questions/{questionId}")
 	public Question getQuestionFromSurvey(@PathVariable final String surveyId, @PathVariable final String questionId) {
 		return surveyService.retrieveQuestion(surveyId, questionId);
-	}
-
-	@GetMapping("surveys")
-	public List<Survey> getAllSurveys() {
-		return surveyService.retrieveAllSurveys();
 	}
 
 	@PostMapping("surveys/{surveyId}/add")

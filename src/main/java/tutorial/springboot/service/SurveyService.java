@@ -36,9 +36,11 @@ public class SurveyService {
 
 	public Question retrieveQuestion(String surveyId, String questionId) {
 
-		return retrieveSurvey(surveyId) == null ? null
-				: retrieveSurvey(surveyId).getQuestions().stream()
-						.filter(question -> questionId.equals(question.getId())).findAny().orElse(null);
+		Survey retrieveSurvey = retrieveSurvey(surveyId);
+
+		return retrieveSurvey == null ? null
+				: retrieveSurvey.getQuestions().stream().filter(question -> questionId.equals(question.getId()))
+						.findAny().orElse(null);
 	}
 
 	private SecureRandom random = new SecureRandom();
