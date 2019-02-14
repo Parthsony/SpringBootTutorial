@@ -15,14 +15,14 @@ import tutorial.springboot.repository.SurveyRepository;
 
 /**
  * The purpose of this class is to populate sample data when application get
- * starts. i.e Add one survey and question into database As soon as spring boot
- * app launches command line method will be Invoked
+ * starts. i.e Add one survey and questions into database as soon as spring boot
+ * app launches command line runners run method will be Invoked
  * 
  * @author Parth Soni
  */
 
 @Component
-public class UserCommandLineRunner implements CommandLineRunner {
+public class ApplicationCommandLineRunner implements CommandLineRunner {
 
 	@Autowired
 	private SurveyRepository surveyRepository;
@@ -65,8 +65,8 @@ public class UserCommandLineRunner implements CommandLineRunner {
 		questions.add(question3);
 		questions.add(question4);
 
-		survey1.setTitle("Largest Country");
-		survey1.setDescription("Largest Country in the World by Land");
+		survey1.setTitle("General Questions");
+		survey1.setDescription("Survey about general knowledge questions asked to people");
 		survey1.setQuestions(questions);
 
 		surveyRepository.save(survey1);

@@ -33,4 +33,20 @@ public class SurveyService {
 		return getSurveyRepository().stream().filter(survey -> surveyId.equals(survey.getId())).findAny().orElse(null);
 	}
 
+	public Survey addSurvey(Survey survey) {
+		Survey newSurvey = surveyRepository.save(survey);
+		newSurvey.getQuestions().forEach(question -> question.setSurvey(newSurvey));
+		return surveyRepository.save(newSurvey);
+	}
+
+	public Survey updatedSurveyTitle(Long surveyId, String dtoSurveyTitle) {
+
+		if (surveyRepository.existsById(surveyId)) {
+			surveyRepository.updateTitle(surveyId, dtoSurveyTitle);
+			return retrieveSurvey(surveyId);
+		}
+
+		return null;
+	}
+
 }

@@ -50,6 +50,7 @@ public class QuestionService {
 			return null;
 		}
 
+		question.setSurvey(survey);
 		survey.getQuestions().add(question);
 
 		return questionRepository.save(question);
