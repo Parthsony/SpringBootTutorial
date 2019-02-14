@@ -1,40 +1,75 @@
 package tutorial.springboot.jpa;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import tutorial.springboot.repository.UserRepository;
+import tutorial.springboot.constant.AppContants;
+import tutorial.springboot.model.Question;
+import tutorial.springboot.model.Survey;
+import tutorial.springboot.repository.SurveyRepository;
 
 /**
- * As soon as spring boot app launches command line method will be Invoked
+ * The purpose of this class is to populate sample data when application get
+ * starts. i.e Add one survey and question into database As soon as spring boot
+ * app launches command line method will be Invoked
  * 
- * @author parth.soni
- *
+ * @author Parth Soni
  */
 
 @Component
 public class UserCommandLineRunner implements CommandLineRunner {
 
-	private static final Logger log = LoggerFactory.getLogger(UserCommandLineRunner.class);
-
 	@Autowired
-	UserRepository userRepository;
+	private SurveyRepository surveyRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
-		userRepository.save(new User("Parth", "Admin"));
-		userRepository.save(new User("Kevin", "Admin"));
-		userRepository.save(new User("Vatsal", "User"));
-		userRepository.save(new User("Nehal", "User"));
 
-		userRepository.findDistinctRoles().forEach(user -> {
-			if (userRepository.existsById(user.getId())) {
-				log.info(user.toString());
-			}
-		});
+		List<String> options = Arrays.asList(AppContants.INDIA, AppContants.RUSSIA, AppContants.UNITED_STATES,
+				AppContants.CHINA);
+
+		Survey survey1 = new Survey();
+
+		Question question1 = new Question();
+		question1.setDescription("Largest Country in the World By land");
+		question1.setCorrectAnswer(AppContants.RUSSIA);
+		question1.setOptions(options);
+		question1.setSurvey(survey1);
+
+		Question question2 = new Question();
+		question2.setDescription("Largest Country in the World By land");
+		question2.setCorrectAnswer(AppContants.CHINA);
+		question2.setOptions(options);
+		question2.setSurvey(survey1);
+
+		Question question3 = new Question();
+		question3.setDescription("Highest GDP in the World");
+		question3.setCorrectAnswer(AppContants.UNITED_STATES);
+		question3.setOptions(options);
+		question3.setSurvey(survey1);
+
+		Question question4 = new Question();
+		question4.setDescription("Second largest english speaking country");
+		question4.setCorrectAnswer(AppContants.INDIA);
+		question4.setOptions(options);
+		question4.setSurvey(survey1);
+
+		List<Question> questions = new ArrayList<>();
+		questions.add(question1);
+		questions.add(question2);
+		questions.add(question3);
+		questions.add(question4);
+
+		survey1.setTitle("Largest Country");
+		survey1.setDescription("Largest Country in the World by Land");
+		survey1.setQuestions(questions);
+
+		surveyRepository.save(survey1);
 	}
 
 }
