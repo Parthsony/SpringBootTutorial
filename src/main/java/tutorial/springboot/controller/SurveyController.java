@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,6 +75,16 @@ public class SurveyController {
 			return new ResponseEntity<>(survey, HttpStatus.OK);
 		}
 		return null;
+	}
+
+	@DeleteMapping("/{surveyId}")
+	public ResponseEntity<String> deleteSurvey(@PathVariable Long surveyId) {
+
+		String deleteSurvey = surveyService.deleteSurvey(surveyId);
+		if (null != deleteSurvey) {
+			return new ResponseEntity<>(deleteSurvey, HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 }

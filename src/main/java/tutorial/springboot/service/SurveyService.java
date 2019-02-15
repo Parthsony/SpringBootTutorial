@@ -16,7 +16,7 @@ public class SurveyService {
 	private SurveyRepository surveyRepository;
 
 	/**
-	 * Populates list of object when application gets loaded
+	 * Populates list of survey objects when application gets loaded
 	 * 
 	 * @return List of all the surveys
 	 */
@@ -46,6 +46,14 @@ public class SurveyService {
 			return retrieveSurvey(surveyId);
 		}
 
+		return null;
+	}
+
+	public String deleteSurvey(Long surveyId) {
+
+		if (surveyRepository.existsById(surveyId)) {
+			surveyRepository.deleteById(surveyId);
+		}
 		return null;
 	}
 

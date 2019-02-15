@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Modal class of Survey
+ * Model class of Survey
  * 
  * @author Parth Soni
  *
@@ -42,6 +42,6 @@ public class Survey implements Serializable {
 	private String description;
 
 	@JsonIgnoreProperties("survey")
-	@OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<Question> questions;
 }

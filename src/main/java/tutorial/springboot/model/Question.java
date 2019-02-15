@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Modal class of Question
+ * Model class of Question
  * 
  * @author Parth Soni
  *
