@@ -42,7 +42,7 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 		question1.setSurvey(survey1);
 
 		Question question2 = new Question();
-		question2.setDescription("Largest Country in the World By land");
+		question2.setDescription("Largest Country in the World By Population");
 		question2.setCorrectAnswer(AppContants.CHINA);
 		question2.setOptions(options);
 		question2.setSurvey(survey1);

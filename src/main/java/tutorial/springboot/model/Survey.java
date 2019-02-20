@@ -44,4 +44,14 @@ public class Survey implements Serializable {
 	@JsonIgnoreProperties("survey")
 	@OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<Question> questions;
+
+	public void addQuestion(Question question) {
+		questions.add(question);
+		question.setSurvey(this);
+	}
+
+	public void removeQuestion(Question question) {
+		questions.remove(question);
+		question.setSurvey(null);
+	}
 }

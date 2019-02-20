@@ -60,7 +60,7 @@ public class SurveyController {
 		if (null == newSurvey)
 			return ResponseEntity.noContent().build();
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(newSurvey.getId())
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("{surveyId}").buildAndExpand(newSurvey.getId())
 				.toUri();
 
 		return ResponseEntity.created(location).build();
